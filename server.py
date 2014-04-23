@@ -1,17 +1,25 @@
 # -*- coding: UTF-8 -*-
 import serial
-class RS232Client:
-    def __init__(self,port=0,timeout=1000):
+class RS232Server:
+    def __init__(self,port=0):
         self.port = port
-        self.obj = serial.Serial(port,9600,serial.EIGHTBITS)
-        self.obj.timeout = timeout
-    def escrever(self):
-        if self.obj.name:
-            string = ""
-            while string != "FIM":
+        self.obj = serial.Serial(port,9600)
+        self.obj.parity=serial.PARITY_NONE
+        self.obj.stopbits=serial.STOPBITS_ONE
+        self.obj.bytesize=serial.FIVEBITS
+    def escrever(self,arquivo=0):
+        self.botao['state'] = DISABLED
+        if arquivo == 0:
+            if self.obj.name:
                 string = input("ESCREVA\n")
-                self.obj.write(string.encode())
-                print(string)
-            print("SAIU while")
-obj = RS232Client("/dev/ttyS10")
-obj.escrever()
+                while string != "FIM":
+                    self.obj.write(string)
+                    string = input("")
+        else:
+            arquivo = open(arquivo,"rb")
+            string = arquivo.read()
+            self.obj.write(string)
+    def mudarConfig(self):
+        self.obj.parity=serial.PARITY_EVEN
+        self.obj.stopbits=serial.STOPBITS_ONE_POINT_FIVE
+        self.obj.bytesize=serial.SIXBITS
