@@ -28,6 +28,7 @@ class Client(Tk):
 		self.x.mudarConfig()
 	def ler(self):
 		self.botao['state'] = DISABLED
+		self.text['state'] = DISABLED
 		t = Thread( target=self.internal )
 		t.start()
 	def internal(self):	

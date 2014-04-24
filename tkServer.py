@@ -20,6 +20,7 @@ class Server(Tk):
 
 		self.frame.pack( expand=True )
 	def escrever(self):
+		self.botao['state'] = DISABLED
 		t = Thread( target=self.internal )
 		t.start()
 	def internal(self):

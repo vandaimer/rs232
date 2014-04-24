@@ -4,7 +4,7 @@ import os
 class RS232Client():
     def __init__(self, port):
         self.port = port
-        self.obj = serial.Serial(port,9600)
+        self.obj = serial.Serial(port,18000)
         self.obj.timeout = 30
         self.obj.parity=serial.PARITY_NONE
         self.obj.stopbits=serial.STOPBITS_ONE

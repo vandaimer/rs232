@@ -3,12 +3,11 @@ import serial
 class RS232Server:
     def __init__(self,port=0):
         self.port = port
-        self.obj = serial.Serial(port,9600)
+        self.obj = serial.Serial(port,18000)
         self.obj.parity=serial.PARITY_NONE
         self.obj.stopbits=serial.STOPBITS_ONE
         self.obj.bytesize=serial.FIVEBITS
     def escrever(self,arquivo=0):
-        self.botao['state'] = DISABLED
         if arquivo == 0:
             if self.obj.name:
                 string = input("ESCREVA\n")
