@@ -1,12 +1,9 @@
 # -*- coding: UTF-8 -*-
-import serial
+from mySerial import *
 class RS232Server:
     def __init__(self,port=0):
-        self.port = port
-        self.obj = serial.Serial(port,18000)
-        self.obj.parity=serial.PARITY_NONE
-        self.obj.stopbits=serial.STOPBITS_ONE
-        self.obj.bytesize=serial.FIVEBITS
+        self.serial = mySerial( port )
+        self.obj = self.serial.getObj()
     def escrever(self,arquivo=0):
         if arquivo == 0:
             if self.obj.name:
@@ -19,6 +16,4 @@ class RS232Server:
             string = arquivo.read()
             self.obj.write(string)
     def mudarConfig(self):
-        self.obj.parity=serial.PARITY_EVEN
-        self.obj.stopbits=serial.STOPBITS_ONE_POINT_FIVE
-        self.obj.bytesize=serial.SIXBITS
+        self.serial.mudarConfig()

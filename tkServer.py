@@ -24,8 +24,11 @@ class Server(Tk):
 		t = Thread( target=self.internal )
 		t.start()
 	def internal(self):
+		//criar objeto RS232Server
 		x = RS232Server( "/dev/ttyS10" )
+		//Muda de Configuração, como pedido no enunciado
 		x.mudarConfig()
+		//envia bit pela porta RS232
 		x.escrever( self.textCaixa.get() );
 app = Server()
 mainloop()
